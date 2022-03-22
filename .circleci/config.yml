@@ -31,6 +31,7 @@ jobs:
             docker build -t "$TAG" -t web:latest .
             
   heroku-deploy:
+    machine: true
     steps:
       - checkout
       - run:
