@@ -29,10 +29,22 @@ jobs:
           command: |
             export TAG=$(echo $CIRCLE_SHA1 | cut -c -7)
             docker build -t "$TAG" -t web:latest .
+            
+   heroku-deploy:
+    steps:
+      - checkout
+      - run:
+          name: Build and push Docker image to Heroku
+          command: |
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:push -a oc-lettings-23 web
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a oc-lettings-23 web
 
 workflows:
   sample:
     jobs:
       - test
       - docker-build
+      - heroku-deploy
 
