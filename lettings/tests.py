@@ -24,10 +24,8 @@ class TestView(TestCase):
             zip_code="06100",
             country_iso_code="FRA",
         )
-        fake_letting = Letting.objects.create(title="Fake Letting", address=fake_address)
+        Letting.objects.create(title="Fake Letting", address=fake_address)
 
         response = client.get(reverse("lettings:letting", kwargs={"letting_id": 1}))
         self.assertContains(response, '<title>Fake Letting</title>')
         self.assertContains(response, '<p>25 Avenue Jean Jaurès</p>')
-
-
