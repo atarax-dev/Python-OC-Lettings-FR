@@ -6,7 +6,7 @@ orbs:
 
 
 jobs:
-  test:
+  tests:
     docker:
       - image: cimg/python:3.10.2
 
@@ -17,6 +17,9 @@ jobs:
       - run:
           name: Run tests
           command: pytest
+      - run:
+          name: Run linting
+          command: flake8
 
   docker-build:
     docker:
@@ -43,9 +46,19 @@ jobs:
             HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:release -a oc-lettings-23 web
 
 workflows:
-  sample:
+  test-and-deploy:
     jobs:
-      - test
-      - docker-build
-      - heroku-deploy
-
+      - tests
+      - docker-build:
+          requires:
+            - tests
+          filters:
+            branches:
+              only: main
+      - heroku-deploy:
+          requires:
+              - tests
+              - docker-build
+          filters:
+            branches:
+              only: main
