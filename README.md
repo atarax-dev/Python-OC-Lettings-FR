@@ -92,10 +92,14 @@ Si vous souhaitez redéployer l'application depuis votre machine, vous devrez in
 
 `https://devcenter.heroku.com/articles/getting-started-with-python#set-up`
 
+Ouvrez un terminal dans le dossier de l'application et tapez la commande suivante:
+`$ heroku login` afin de vous logger puis 
+`$ heroku create` afin de créer une application vide sur heroku
+
 Vous aurez besoin de déclarer les variables d'environnement soit dans un fichier .env pour lancer
 l'application en local ou sur les plateformes de CircleCI ou Heroku pour un déploiement en ligne.
 
-Pour obtenir le HEROKU_TOKEN, tapez la commande suivante dans un terminal du dossier du clone de ce repo:
+Pour obtenir le HEROKU_TOKEN, tapez la commande suivante :
 
 `$ heroku authorizations:create`
 
@@ -117,3 +121,15 @@ Vous pourrez utiliser ensuite les commandes suivantes:
 Vous pourrez ensuite afficher votre site en local 
 
 `http://localhost:8007/`
+
+Lien du pipeline actuel:
+
+https://app.circleci.com/pipelines/github/atarax-dev/Python-OC-Lettings-FR?invite=true
+
+Lien vers le site sur Heroku:
+
+https://oc-lettings-23.herokuapp.com/
+
+Lien du Sentry (Vous devez avoir un compte Sentry et demander l'autorisation)
+
+https://sentry.io/organizations/vernet-audric/projects/oc-lettings/?project=6272018
